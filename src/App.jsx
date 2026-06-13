@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { Box, CircularProgress, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useAuth } from "./hooks/useAuth.js";
 import { useCollection } from "./hooks/useCollection.js";
 import { useDocument } from "./hooks/useDocument.js";
@@ -27,7 +27,7 @@ const expandedWidth = 284;
 const collapsedWidth = 88;
 
 function AppShell() {
-  const { isLoggedIn, loading: authLoading } = useAuth();
+  const { isLoggedIn } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
@@ -42,14 +42,6 @@ function AppShell() {
   const [deliveryEntries,       setDeliveryEntries]       = useCollection("deliveryEntries");
   const [deliverySubscriptions, setDeliverySubscriptions] = useCollection("subscriptions");
   const [settings,              setSettings]              = useDocument("appSettings", "main", initialSettings);
-
-  if (authLoading) {
-    return (
-      <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
-        <CircularProgress />
-      </Box>
-    );
-  }
 
   if (!isLoggedIn) return <Navigate to="/login" replace />;
 

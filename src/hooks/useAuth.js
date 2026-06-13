@@ -1,31 +1,33 @@
-import { useCallback, useEffect, useState } from "react";
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { auth } from "../firebase.js";
+import { useCallback } from "react";
+import { useLocalStorage } from "./useLocalStorage.js";
+
+const ADMIN_EMAIL    = "admin@sekarmilk.in";
+const ADMIN_PASSWORD = "admin";
+const AUTH_KEY       = "sekar-auth-session";
 
 export function useAuth() {
-  const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [session, setSession] = useLocalStorage(AUTH_KEY, null);
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      setSession(user ? { email: user.email, role: "admin", uid: user.uid } : null);
-      setLoading(false);
-    });
-    return unsub;
-  }, []);
-
-  const login = useCallback(async (email, password) => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
+  const login = useCallback((email, password) => {
+    if (
+      email.trim().toLowerCase() === ADMIN_EMAIL &&
+      password === ADMIN_PASSWORD
+    ) {
+      setSession({ email: ADMIN_EMAIL, role: "admin", loginAt: new Date().toISOString() });
       return { ok: true };
-    } catch {
-      return { ok: false, error: "Invalid email or password." };
     }
-  }, []);
+    return { ok: false, error: "Invalid email or password." };
+  }, [setSession]);
 
-  const logout = useCallback(async () => {
-    await signOut(auth);
-  }, []);
+  const logout = useCallback(() => {
+    setSession(null);
+  }, [setSession]);
 
-  return { session, isLoggedIn: Boolean(session), loading, login, logout };
+  return {
+    session,
+    isLoggedIn: Boolean(session),
+    loading: false,
+    login,
+    logout,
+  };
 }
