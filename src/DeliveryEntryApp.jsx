@@ -30,8 +30,7 @@ import {
   MdSave,
   MdWbSunny,
 } from "react-icons/md";
-import { useLocalStorage } from "./hooks/useLocalStorage.js";
-import { initialDeliveryCustomers, initialDeliveryEntries } from "./services/deliverySeedData.js";
+import { useCollection } from "./hooks/useCollection.js";
 import { createId, roundMoney, toNumber } from "./utils/calculations.js";
 import { toInputDate } from "./utils/dateUtils.js";
 import { formatDate, formatLiters } from "./utils/formatters.js";
@@ -58,8 +57,8 @@ function loadFormFromEntry(customer, entries, date) {
 }
 
 export default function DeliveryEntryApp() {
-  const [deliveryCustomers] = useLocalStorage("sekar-delivery-customers", initialDeliveryCustomers);
-  const [deliveryEntries, setDeliveryEntries] = useLocalStorage("sekar-delivery-entries", initialDeliveryEntries);
+  const [deliveryCustomers]              = useCollection("deliveryCustomers");
+  const [deliveryEntries, setDeliveryEntries] = useCollection("deliveryEntries");
 
   const activeCustomers = useMemo(() => deliveryCustomers.filter((c) => c.isActive), [deliveryCustomers]);
 

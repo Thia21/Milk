@@ -29,8 +29,9 @@ import {
   MdSave,
   MdWbSunny,
 } from "react-icons/md";
-import { useLocalStorage } from "./hooks/useLocalStorage.js";
-import { initialCenters, initialEntries, initialSettings } from "./services/seedData.js";
+import { useCollection } from "./hooks/useCollection.js";
+import { useDocument } from "./hooks/useDocument.js";
+import { initialSettings } from "./services/seedData.js";
 import {
   createId,
   getCenterName,
@@ -63,9 +64,9 @@ function loadFormFromEntry(center, entries, date, defaultRate) {
 }
 
 export default function CollectionEntryApp() {
-  const [centers] = useLocalStorage("sekar-centers", initialCenters);
-  const [entries, setEntries] = useLocalStorage("sekar-milk-entries", initialEntries);
-  const [settings] = useLocalStorage("sekar-settings", initialSettings);
+  const [centers]          = useCollection("centers");
+  const [entries, setEntries] = useCollection("milkEntries");
+  const [settings]         = useDocument("appSettings", "main", initialSettings);
 
   const activeCenters = useMemo(() => centers.filter((c) => c.status === "Active"), [centers]);
 

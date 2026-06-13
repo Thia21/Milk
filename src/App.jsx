@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { Box, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
+import { Box, CircularProgress, CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useAuth } from "./hooks/useAuth.js";
+import { useCollection } from "./hooks/useCollection.js";
+import { useDocument } from "./hooks/useDocument.js";
 import Login from "./pages/Login.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
@@ -17,13 +19,7 @@ import DeliveryCustomers from "./pages/delivery/DeliveryCustomers.jsx";
 import DeliveryEntries from "./pages/delivery/DeliveryEntries.jsx";
 import DeliverySubscriptions from "./pages/delivery/DeliverySubscriptions.jsx";
 import DeliveryReports from "./pages/delivery/DeliveryReports.jsx";
-import { useLocalStorage } from "./hooks/useLocalStorage.js";
-import { initialCenters, initialEntries, initialPayments, initialSettings } from "./services/seedData.js";
-import {
-  initialDeliveryCustomers,
-  initialDeliveryEntries,
-  initialDeliverySubscriptions,
-} from "./services/deliverySeedData.js";
+import { initialSettings } from "./services/seedData.js";
 import { theme } from "./theme.js";
 import "./App.css";
 
@@ -31,24 +27,30 @@ const expandedWidth = 284;
 const collapsedWidth = 88;
 
 function AppShell() {
-  // All hooks MUST come before any conditional return (React rules of hooks)
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, loading: authLoading } = useAuth();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  // Close sidebar on mobile automatically
+
   useEffect(() => {
     if (isMobile) setIsSidebarOpen(false);
   }, [isMobile]);
 
-  const [centers, setCenters] = useLocalStorage("sekar-centers", initialCenters);
-  const [entries, setEntries] = useLocalStorage("sekar-milk-entries", initialEntries);
-  const [payments, setPayments] = useLocalStorage("sekar-payments", initialPayments);
-  const [settings, setSettings] = useLocalStorage("sekar-settings", initialSettings);
-  const [deliveryCustomers, setDeliveryCustomers] = useLocalStorage("sekar-delivery-customers", initialDeliveryCustomers);
-  const [deliveryEntries, setDeliveryEntries] = useLocalStorage("sekar-delivery-entries", initialDeliveryEntries);
-  const [deliverySubscriptions, setDeliverySubscriptions] = useLocalStorage("sekar-delivery-subscriptions", initialDeliverySubscriptions);
+  const [centers,               setCenters]               = useCollection("centers");
+  const [entries,               setEntries]               = useCollection("milkEntries");
+  const [payments,              setPayments]              = useCollection("payments");
+  const [deliveryCustomers,     setDeliveryCustomers]     = useCollection("deliveryCustomers");
+  const [deliveryEntries,       setDeliveryEntries]       = useCollection("deliveryEntries");
+  const [deliverySubscriptions, setDeliverySubscriptions] = useCollection("subscriptions");
+  const [settings,              setSettings]              = useDocument("appSettings", "main", initialSettings);
 
-  // Guard after hooks
+  if (authLoading) {
+    return (
+      <Box display="flex" alignItems="center" justifyContent="center" height="100vh">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   if (!isLoggedIn) return <Navigate to="/login" replace />;
 
   const sidebarWidth = isSidebarOpen && !isMobile ? expandedWidth : collapsedWidth;
@@ -73,9 +75,7 @@ function AppShell() {
 
   return (
     <Box className="app-shell">
-      {/* Cross-app navigation bar — sits above the sidebar */}
       <AppNav current="main" />
-
       <Sidebar
         collapsed={!isSidebarOpen}
         isMobile={isMobile}
