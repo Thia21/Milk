@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Avatar,
@@ -11,22 +11,35 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { MdMenu, MdNotificationsNone, MdSearch } from "react-icons/md";
+import { MdLogout, MdMenu, MdNotificationsNone, MdSearch } from "react-icons/md";
+import { useAuth } from "../hooks/useAuth.js";
 import { formatDate } from "../utils/formatters.js";
 import { toInputDate } from "../utils/dateUtils.js";
 
 const titles = {
-  "/dashboard": "Dashboard",
-  "/centers": "Collection Centers",
-  "/milk-entries": "Daily Milk Collection",
-  "/payments": "Payments",
-  "/reports": "Reports",
-  "/settings": "Settings",
+  "/dashboard":              "Collection Dashboard",
+  "/centers":                "Collection Centers",
+  "/milk-entries":           "Daily Milk Collection",
+  "/payments":               "Payments",
+  "/reports":                "Reports",
+  "/settings":               "Settings",
+  "/delivery/dashboard":     "Delivery Overview",
+  "/delivery/customers":     "Delivery Customers",
+  "/delivery/entries":       "Daily Delivery Log",
+  "/delivery/subscriptions": "Subscription Payments",
+  "/delivery/reports":       "Delivery Reports",
 };
 
 export default function Header({ companyName, onSidebarToggle, sidebarWidth }) {
   const location = useLocation();
+  const navigate  = useNavigate();
+  const { logout } = useAuth();
   const pageTitle = titles[location.pathname] || "Dashboard";
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   const currentDate = useMemo(() => formatDate(toInputDate()), []);
 
@@ -36,7 +49,7 @@ export default function Header({ companyName, onSidebarToggle, sidebarWidth }) {
       color="inherit"
       className="topbar no-print"
       sx={{
-        borderBottom: "1px solid #e4edf7",
+        borderBottom: "1px solid #D4EDD4",
         bgcolor: "rgba(255, 255, 255, 0.92)",
         backdropFilter: "blur(16px)",
         ml: { md: `${sidebarWidth}px` },
@@ -61,14 +74,14 @@ export default function Header({ companyName, onSidebarToggle, sidebarWidth }) {
 
         <Stack direction="row" alignItems="center" spacing={1} className="topbar-actions">
           <Chip label={currentDate} className="date-chip" />
-          <Tooltip title="Search">
-            <IconButton aria-label="Search" className="topbar-icon">
-              <MdSearch size={22} />
+          <Tooltip title="Notifications">
+            <IconButton aria-label="Notifications" className="topbar-icon" sx={{ display: { xs: "none", sm: "inline-flex" } }}>
+              <MdNotificationsNone size={22} />
             </IconButton>
           </Tooltip>
-          <Tooltip title="Notifications">
-            <IconButton aria-label="Notifications" className="topbar-icon">
-              <MdNotificationsNone size={22} />
+          <Tooltip title="Sign out">
+            <IconButton aria-label="Sign out" onClick={handleLogout} className="topbar-icon">
+              <MdLogout size={20} />
             </IconButton>
           </Tooltip>
           <Avatar className="user-avatar">SM</Avatar>

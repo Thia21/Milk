@@ -21,24 +21,14 @@ import { MdAdd, MdDelete, MdEdit } from "react-icons/md";
 import DataTable from "../components/DataTable.jsx";
 import { calculateEntryTotals, createId, getCenterName, normalizeMilkEntry } from "../utils/calculations.js";
 import { compareDateDesc, toInputDate } from "../utils/dateUtils.js";
-import { formatCurrency, formatDate, formatLiters, formatPercent } from "../utils/formatters.js";
+import { formatCurrency, formatDate, formatLiters } from "../utils/formatters.js";
 
 function createEmptyEntry(centers, defaultRate) {
   return {
     date: toInputDate(),
     centerId: centers[0]?.id || "",
-    morning: {
-      liters: "",
-      fat: "",
-      snf: "",
-      rate: defaultRate,
-    },
-    evening: {
-      liters: "",
-      fat: "",
-      snf: "",
-      rate: defaultRate,
-    },
+    morning: { liters: "", rate: defaultRate },
+    evening: { liters: "", rate: defaultRate },
   };
 }
 
@@ -130,12 +120,10 @@ export default function MilkEntries() {
       render: (row) => (
         <Box>
           <Typography className="table-title">{formatLiters(row.morning.liters)}</Typography>
-          <Typography className="table-subtitle">
-            Fat {formatPercent(row.morning.fat)} | SNF {formatPercent(row.morning.snf)}
-          </Typography>
+          <Typography className="table-subtitle">₹{row.morning.rate}/L</Typography>
         </Box>
       ),
-      minWidth: 180,
+      minWidth: 140,
     },
     {
       id: "evening",
@@ -143,12 +131,10 @@ export default function MilkEntries() {
       render: (row) => (
         <Box>
           <Typography className="table-title">{formatLiters(row.evening.liters)}</Typography>
-          <Typography className="table-subtitle">
-            Fat {formatPercent(row.evening.fat)} | SNF {formatPercent(row.evening.snf)}
-          </Typography>
+          <Typography className="table-subtitle">₹{row.evening.rate}/L</Typography>
         </Box>
       ),
-      minWidth: 180,
+      minWidth: 140,
     },
     {
       id: "totalLiters",
@@ -247,23 +233,7 @@ export default function MilkEntries() {
                         required
                       />
                       <TextField
-                        label="Fat %"
-                        type="number"
-                        value={form[session].fat}
-                        onChange={updateSessionField(session, "fat")}
-                        inputProps={{ min: 0, step: "0.01" }}
-                        required
-                      />
-                      <TextField
-                        label="SNF %"
-                        type="number"
-                        value={form[session].snf}
-                        onChange={updateSessionField(session, "snf")}
-                        inputProps={{ min: 0, step: "0.01" }}
-                        required
-                      />
-                      <TextField
-                        label="Rate Per Liter"
+                        label="Rate Per Liter (₹)"
                         type="number"
                         value={form[session].rate}
                         onChange={updateSessionField(session, "rate")}

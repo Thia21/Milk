@@ -40,14 +40,14 @@ export default function Dashboard() {
       value: centers.length,
       caption: `${activeCenters} active centers`,
       icon: MdStorefront,
-      color: "#1a73e8",
+      color: "#3DB54A",
     },
     {
       title: "Today's Milk Collection",
       value: formatLiters(sumBy(todayEntries, (entry) => entry.totalLiters)),
       caption: `${todayEntries.length} entries today`,
       icon: MdLocalDrink,
-      color: "#00a4e4",
+      color: "#00C49A",
     },
     {
       title: "Monthly Milk Collection",
@@ -68,7 +68,7 @@ export default function Dashboard() {
       value: formatCurrency(paidAmount),
       caption: "Collected amount",
       icon: MdAccountBalanceWallet,
-      color: "#1558b0",
+      color: "#2A8835",
     },
   ];
 

@@ -107,14 +107,10 @@ function buildEntry(index) {
     centerId: center.id,
     morning: {
       liters: morningLiters,
-      fat: roundMoney(3.7 + (index % 4) * 0.1),
-      snf: roundMoney(8.2 + (index % 3) * 0.1),
       rate: baseRate,
     },
     evening: {
       liters: eveningLiters,
-      fat: roundMoney(3.6 + (index % 5) * 0.1),
-      snf: roundMoney(8.1 + (index % 4) * 0.1),
       rate: baseRate + 1,
     },
     createdAt: new Date().toISOString(),

@@ -26,14 +26,10 @@ export function normalizeMilkEntry(entry) {
     ...entry,
     morning: {
       liters: toNumber(entry.morning?.liters),
-      fat: toNumber(entry.morning?.fat),
-      snf: toNumber(entry.morning?.snf),
       rate: toNumber(entry.morning?.rate),
     },
     evening: {
       liters: toNumber(entry.evening?.liters),
-      fat: toNumber(entry.evening?.fat),
-      snf: toNumber(entry.evening?.snf),
       rate: toNumber(entry.evening?.rate),
     },
     ...totals,

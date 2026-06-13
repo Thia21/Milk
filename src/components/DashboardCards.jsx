@@ -3,12 +3,13 @@ import { Grid, Paper, Stack, Typography } from "@mui/material";
 export default function DashboardCards({ cards }) {
   return (
     <Grid container spacing={2.5} sx={{ mb: 3 }}>
-      {cards.map((card) => {
+      {cards.map((card, index) => {
         const Icon = card.icon;
+        const delay = `${index * 0.07}s`;
 
         return (
           <Grid item xs={12} sm={6} lg={card.lg || 2.4} key={card.title}>
-            <Paper className="dashboard-card">
+            <Paper className="dashboard-card" style={{ animationDelay: delay }}>
               <Stack direction="row" alignItems="flex-start" justifyContent="space-between" spacing={2}>
                 <div>
                   <Typography className="card-title">{card.title}</Typography>

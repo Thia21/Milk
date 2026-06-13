@@ -34,7 +34,10 @@ export default function DataTable({
   };
 
   return (
-    <Paper className="soft-card data-table-card">
+    <Paper
+      className="soft-card data-table-card"
+      sx={{ borderRadius: "12px", overflow: "hidden" }}
+    >
       <TableContainer>
         <Table size="medium">
           <TableHead>
@@ -61,7 +64,14 @@ export default function DataTable({
               </TableRow>
             ) : (
               paginatedRows.map((row, index) => (
-                <TableRow hover key={getRowId ? getRowId(row) : row.id || index}>
+                <TableRow
+                  key={getRowId ? getRowId(row) : row.id || index}
+                  sx={{
+                    bgcolor: index % 2 === 0 ? "#ffffff" : "#F8FFF8",
+                    "&:hover": { bgcolor: "#EDF8EE !important" },
+                    transition: "background 120ms ease",
+                  }}
+                >
                   {columns.map((column) => (
                     <TableCell key={column.id} align={column.align || "left"}>
                       {column.render ? column.render(row) : row[column.id]}

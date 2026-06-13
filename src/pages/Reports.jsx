@@ -16,7 +16,7 @@ import DataTable from "../components/DataTable.jsx";
 import { exportToCsv, printReport } from "../utils/exporters.js";
 import { getCenterName, sumBy } from "../utils/calculations.js";
 import { getMonthKey, getWeekRange, isBetweenDates, toInputDate } from "../utils/dateUtils.js";
-import { formatCurrency, formatDate, formatLiters, formatPercent } from "../utils/formatters.js";
+import { formatCurrency, formatDate, formatLiters } from "../utils/formatters.js";
 
 const reportTypes = [
   { value: "daily", label: "Daily Report" },
@@ -82,17 +82,6 @@ export default function Reports() {
       render: (row) => formatLiters(row.evening.liters),
     },
     {
-      id: "quality",
-      label: "Quality",
-      minWidth: 150,
-      render: (row) => (
-        <Box>
-          <Typography className="table-subtitle">Fat {formatPercent(row.morning.fat)}</Typography>
-          <Typography className="table-subtitle">SNF {formatPercent(row.morning.snf)}</Typography>
-        </Box>
-      ),
-    },
-    {
       id: "totalLiters",
       label: "Total Liters",
       render: (row) => formatLiters(row.totalLiters),
@@ -112,11 +101,9 @@ export default function Reports() {
         { header: "Date", value: (row) => row.date },
         { header: "Collection Center", value: (row) => getCenterName(centers, row.centerId) },
         { header: "Morning Liters", value: (row) => row.morning.liters },
-        { header: "Morning Fat", value: (row) => row.morning.fat },
-        { header: "Morning SNF", value: (row) => row.morning.snf },
+        { header: "Morning Rate", value: (row) => row.morning.rate },
         { header: "Evening Liters", value: (row) => row.evening.liters },
-        { header: "Evening Fat", value: (row) => row.evening.fat },
-        { header: "Evening SNF", value: (row) => row.evening.snf },
+        { header: "Evening Rate", value: (row) => row.evening.rate },
         { header: "Total Liters", value: (row) => row.totalLiters },
         { header: "Total Amount", value: (row) => row.totalAmount },
       ],
