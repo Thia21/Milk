@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Sekar Milk</string>
+    <string name="title_activity_main">Sekar Milk</string>
+    <string name="package_name">com.sekarmilk.app</string>
+    <string name="custom_url_scheme">com.sekarmilk.app</string>
+</resources>

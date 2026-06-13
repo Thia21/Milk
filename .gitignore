@@ -3,3 +3,11 @@ dist
 .env
 vite-dev.log
 vite-dev.err.log
+
+# Android build output (keep source, ignore build artifacts)
+android/.gradle
+android/app/build
+android/build
+android/local.properties
+*.apk
+*.aab

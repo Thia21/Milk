@@ -5,7 +5,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:pages": "vite build --base=/Milk/",
+    "build:android": "vite build && npx cap sync android",
+    "preview": "vite preview",
+    "icons": "node scripts/generate-icons.mjs",
+    "cap:sync": "npx cap sync android",
+    "cap:open": "npx cap open android"
   },
   "repository": {
     "type": "git",
@@ -29,6 +34,10 @@
     "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.4.0",
+    "@capacitor/cli": "^8.4.0",
+    "@capacitor/core": "^8.4.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@vitejs/plugin-react": "^6.0.2",
     "vite": "^8.0.16"
   }

@@ -1,11 +1,13 @@
 import { Box, Chip, Stack, Typography } from "@mui/material";
 import { MdDashboard, MdLocalDrink, MdLocalShipping } from "react-icons/md";
 
+const BASE = import.meta.env.BASE_URL; // '/' in dev, '/Milk/' on GitHub Pages
+
 const APPS = [
   {
     key: "main",
     label: "Dashboard",
-    href: "/",
+    href: BASE,
     icon: MdDashboard,
     color: "#2D46C4",
     bg: "#EEF2FF",
@@ -14,7 +16,7 @@ const APPS = [
   {
     key: "collection",
     label: "Collection",
-    href: "/collection-entry.html",
+    href: `${BASE}collection-entry.html`,
     icon: MdLocalDrink,
     color: "#b45309",
     bg: "#fff8e1",
@@ -23,7 +25,7 @@ const APPS = [
   {
     key: "delivery",
     label: "Delivery",
-    href: "/delivery-entry.html",
+    href: `${BASE}delivery-entry.html`,
     icon: MdLocalShipping,
     color: "#5b21b6",
     bg: "#ede9fe",

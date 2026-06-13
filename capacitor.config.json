@@ -1,0 +1,23 @@
+{
+  "appId": "com.sekarmilk.app",
+  "appName": "Sekar Milk",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": false
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": null,
+      "keystoreAlias": null
+    }
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1500,
+      "backgroundColor": "#4361EE",
+      "androidSplashResourceName": "splash",
+      "showSpinner": false
+    }
+  }
+}
