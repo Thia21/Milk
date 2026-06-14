@@ -20,12 +20,12 @@ body {
   background:
     linear-gradient(180deg, rgba(200, 214, 255, 0.35), rgba(255, 255, 255, 0) 320px),
     #F0F4FF;
-  /* safe-area padding for phones with gesture bars (Android/iOS) */
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  padding-left: env(safe-area-inset-left, 0px);
-  padding-right: env(safe-area-inset-right, 0px);
-  /* prevent horizontal scroll on small screens */
-  overflow-x: hidden;
+  /* Use `clip`, NOT `hidden`. `overflow-x: hidden` promotes overflow-y to `auto`,
+     turning <body> into the scroll container — which breaks scroll-to-bottom on
+     Android (the gesture bar + bottom padding fall outside the scrollable area).
+     `clip` blocks horizontal overflow while leaving the document as the scroller.
+     Safe-area insets are applied to the page content (.page-shell) instead. */
+  overflow-x: clip;
 }
 
 button,

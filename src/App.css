@@ -95,8 +95,8 @@
 }
 
 .page-shell {
-  /* AppNav (60px) + Header (72px) + gap */
-  padding: 148px 28px 40px;
+  /* top: AppNav (60px) + Header (72px) + 16px gap. bottom: clear the gesture bar. */
+  padding: 148px 28px calc(48px + env(safe-area-inset-bottom, 0px));
   animation: fadeIn 0.22s ease;
 }
 
@@ -445,9 +445,11 @@
 }
 
 @media (max-width: 899px) {
-  /* AppNav (60px) + Header (72px) */
+  /* top: AppNav (60px) + Header (72px) + 16px. sides respect landscape notches. */
   .page-shell {
-    padding: 144px 16px 32px;
+    padding: 148px max(16px, env(safe-area-inset-right, 0px))
+             calc(48px + env(safe-area-inset-bottom, 0px))
+             max(16px, env(safe-area-inset-left, 0px));
   }
 
   .page-heading {
@@ -466,9 +468,11 @@
 }
 
 @media (max-width: 599px) {
-  /* AppNav (56px) + Header (66px) = 122px + 12px gap */
+  /* top: AppNav (56px) + Header toolbar (56px) + 16px. bottom clears gesture bar. */
   .page-shell {
-    padding: 136px 12px 28px;
+    padding: 128px max(12px, env(safe-area-inset-right, 0px))
+             calc(56px + env(safe-area-inset-bottom, 0px))
+             max(12px, env(safe-area-inset-left, 0px));
   }
 
   .form-grid,
@@ -501,9 +505,8 @@
     font-size: 0.72rem !important;
   }
 
-  .topbar-actions .topbar-icon {
-    display: none;
-  }
+  /* keep the Sign-out icon reachable on phones (the sidebar has no logout).
+     The notification bell is already hidden via its own MUI `display` prop. */
 
   .dashboard-card {
     min-height: 120px;
