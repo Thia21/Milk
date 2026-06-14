@@ -173,7 +173,7 @@ export default function DeliveryEntries() {
         <Stack direction="row" spacing={1.5} flexWrap="wrap">
           <Chip
             icon={<MdWbSunny size={14} />}
-            label={`Morning: ${morningDelivered}/${activeCustomers.length} houses Â· ${formatLiters(totals.morning)}`}
+            label={`Morning: ${morningDelivered}/${activeCustomers.length} houses · ${formatLiters(totals.morning)}`}
             sx={{
               bgcolor: "#fff8e1",
               color: "#b45309",
@@ -183,7 +183,7 @@ export default function DeliveryEntries() {
           />
           <Chip
             icon={<MdNightsStay size={14} />}
-            label={`Evening: ${eveningDelivered}/${activeCustomers.length} houses Â· ${formatLiters(totals.evening)}`}
+            label={`Evening: ${eveningDelivered}/${activeCustomers.length} houses · ${formatLiters(totals.evening)}`}
             sx={{
               bgcolor: "#ede9fe",
               color: "#5b21b6",
@@ -306,7 +306,7 @@ export default function DeliveryEntries() {
             <TableRow sx={{ bgcolor: "#F0FAF1", borderTop: "2px solid #C8E6C9" }}>
               <TableCell colSpan={2}>
                 <Typography sx={{ fontWeight: 800, color: "#162033", fontSize: "0.88rem" }}>
-                  Day Total â€” {formatDate(selectedDate)}
+                  Day Total "” {formatDate(selectedDate)}
                 </Typography>
               </TableCell>
               <TableCell>

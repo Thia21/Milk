@@ -145,7 +145,7 @@ export default function DeliveryCustomers() {
       render: (row) => (
         <Box>
           <Typography className="table-title" sx={{ fontSize: "0.86rem !important" }}>
-            {row.morningLitres} L morn Â· {row.eveningLitres} L eve
+            {row.morningLitres} L morn · {row.eveningLitres} L eve
           </Typography>
           <Typography className="table-subtitle">
             {Number(row.morningLitres) + Number(row.eveningLitres)} L / day
@@ -259,7 +259,7 @@ export default function DeliveryCustomers() {
                 required
               />
               <TextField
-                label="Subscription (â‚¹ / month)"
+                label="Subscription (₹ / month)"
                 type="number"
                 value={form.subscriptionAmount}
                 onChange={handleChange("subscriptionAmount")}

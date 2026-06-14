@@ -6,7 +6,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100%;
-  padding: 18px 14px;
+  /* push brand below the AppNav bar */
+  padding: 78px 14px 18px;
 }
 
 .sidebar-brand {
@@ -94,7 +95,8 @@
 }
 
 .page-shell {
-  padding: 88px 28px 32px;
+  /* AppNav (60px) + Header (72px) + gap */
+  padding: 148px 28px 40px;
   animation: fadeIn 0.22s ease;
 }
 
@@ -443,8 +445,9 @@
 }
 
 @media (max-width: 899px) {
+  /* AppNav (60px) + Header (72px) */
   .page-shell {
-    padding: 80px 18px 28px;
+    padding: 144px 16px 32px;
   }
 
   .page-heading {
@@ -455,11 +458,17 @@
   .topbar-actions .date-chip {
     display: none;
   }
+
+  .data-table-card {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 @media (max-width: 599px) {
+  /* AppNav (56px) + Header (66px) = 122px + 12px gap */
   .page-shell {
-    padding: 76px 14px 24px;
+    padding: 136px 12px 28px;
   }
 
   .form-grid,
@@ -479,25 +488,68 @@
   }
 
   .topbar-toolbar {
-    min-height: 66px !important;
-    padding-left: 12px !important;
-    padding-right: 12px !important;
+    min-height: 56px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .topbar-title {
+    font-size: 0.95rem !important;
+  }
+
+  .topbar-company {
+    font-size: 0.72rem !important;
   }
 
   .topbar-actions .topbar-icon {
     display: none;
   }
 
-  .dashboard-card,
+  .dashboard-card {
+    min-height: 120px;
+    padding: 14px;
+  }
+
   .performance-panel,
   .report-filter,
   .settings-panel {
-    padding: 16px;
+    padding: 14px;
   }
 
   .report-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  /* Tables scroll horizontally on small screens */
+  .MuiTableContainer-root {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Make table cells narrower on mobile */
+  .MuiTableCell-root {
+    padding: 10px 8px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .MuiTableCell-head {
+    font-size: 0.75rem !important;
+    white-space: nowrap;
+  }
+
+  /* Card value smaller on tiny screens */
+  .card-value {
+    font-size: 1.35rem !important;
+  }
+
+  .page-heading h1 {
+    font-size: 1.4rem;
+  }
+
+  /* Sidebar section labels */
+  .sidebar-section-label {
+    font-size: 0.62rem;
   }
 }
 

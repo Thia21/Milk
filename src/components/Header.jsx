@@ -52,6 +52,7 @@ export default function Header({ companyName, onSidebarToggle, sidebarWidth }) {
         borderBottom: "1px solid #D4EDD4",
         bgcolor: "rgba(255, 255, 255, 0.92)",
         backdropFilter: "blur(16px)",
+        top: { xs: 56, sm: 60 },
         ml: { md: `${sidebarWidth}px` },
         width: { xs: "100%", md: `calc(100% - ${sidebarWidth}px)` },
         transition: "margin-left 220ms ease, width 220ms ease",

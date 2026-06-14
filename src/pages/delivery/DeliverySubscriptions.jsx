@@ -266,7 +266,7 @@ export default function DeliverySubscriptions() {
         <Box>
           <Typography component="h1">Subscription Payments</Typography>
           <Typography>
-            Track monthly ₹4,000 subscriptions â€” paid, partial, and outstanding.
+            Track monthly ₹4,000 subscriptions "” paid, partial, and outstanding.
           </Typography>
         </Box>
         <TextField
@@ -337,7 +337,7 @@ export default function DeliverySubscriptions() {
       </Grid>
 
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 1.5 }}>
-        <Typography variant="h6">{formatMonth(selectedMonth)} â€” All Customers</Typography>
+        <Typography variant="h6">{formatMonth(selectedMonth)} "” All Customers</Typography>
         <Stack direction="row" spacing={1}>
           <Chip icon={<MdCheckCircle size={14} />} label={`${summary.paid} paid`} color="success" size="small" variant="outlined" />
           <Chip label={`${summary.partial} partial`} color="warning" size="small" variant="outlined" />
@@ -361,7 +361,7 @@ export default function DeliverySubscriptions() {
                 >
                   <Box>
                     <Typography sx={{ fontSize: "0.82rem", fontWeight: 700, color: "#607085" }}>
-                      {partialSub.clientId} â€” {partialSub.customerName}
+                      {partialSub.clientId} "” {partialSub.customerName}
                     </Typography>
                     <strong>{formatCurrency(partialSub.balance)} outstanding</strong>
                   </Box>
@@ -394,7 +394,7 @@ export default function DeliverySubscriptions() {
           {historySub && (
             <>
               <Typography sx={{ mb: 2, color: "#607085", fontWeight: 700 }}>
-                {historySub.clientId} â€” {historySub.customerName} · {formatMonth(selectedMonth)}
+                {historySub.clientId} "” {historySub.customerName} · {formatMonth(selectedMonth)}
               </Typography>
               <List className="history-list">
                 {(historySub.history || []).length === 0 ? (
@@ -408,7 +408,7 @@ export default function DeliverySubscriptions() {
                         primary={
                           <strong style={{ color: "#1e8e3e" }}>{formatCurrency(item.amount)}</strong>
                         }
-                        secondary={`${formatDate(item.date)} â€” ${item.note}`}
+                        secondary={`${formatDate(item.date)} "” ${item.note}`}
                       />
                     </ListItem>
                   ))
