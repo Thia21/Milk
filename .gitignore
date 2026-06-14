@@ -6,6 +6,9 @@ dist
 vite-dev.log
 vite-dev.err.log
 
+# Firebase deploy cache
+.firebase/
+
 # Android build output (keep source, ignore build artifacts)
 android/.gradle
 android/app/build

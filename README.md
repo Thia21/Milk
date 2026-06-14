@@ -14,7 +14,7 @@ Milk collection & delivery management app for Sekar Milk.
 
 ## Web App
 
-**[Open Sekar Milk Web App](https://thia21.github.io/Milk/)**
+**[Open Sekar Milk Web App](https://sekar-milk.web.app)**
 
 Works on any browser. Install as PWA from Chrome → three-dot menu → "Add to Home Screen".
 
@@ -25,5 +25,5 @@ Works on any browser. Install as PWA from Chrome → three-dot menu → "Add to 
 - Morning & evening milk collection entry
 - Delivery tracking with per-customer records
 - Subscription billing overview
-- Offline support — all data stored on device
+- Realtime sync across all devices via Firebase (works offline, syncs when back online)
 - Works as Android APK or browser PWA
